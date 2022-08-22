@@ -22,7 +22,7 @@ res.sendFile(path.join(__dirname, '/public/index.html'))
 app.get('/notes', (req, res) =>
 res.status(200).json(notes));
 
-app.post('/api/reviews', (req, res) => {
+app.post('/api/notes', (req, res) => {
     
     console.info(`${req.method} request received to add a note`);
   
