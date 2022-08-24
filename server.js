@@ -17,35 +17,45 @@ app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-app.get("/api/notes", (req, res) => res.status(200).json(notes));
+app.get("/api/notes", (req, res) => res.json(notes));
 
 app.post("/api/notes", (req, res) => {
-  console.info(`${req.method} request received to add a note`);
+  console.info(`${req.method} request received to add a review`);
 
-  const { title, text } = req.body;
+  const { text, title } = req.body;
 
-  if (title && text) {
+  if (text && title) {
     const newNote = {
       text,
       title,
       note_id: uuid(),
     };
 
-    const noteString = JSON.stringify(newNote);
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const parsedNotes = JSON.parse(data);
 
-    fs.writeFile(`./db/db.json`, noteString, (err) =>
-      err
-        ? console.error(err)
-        : console.log(`A new note for ${newNote} has been written to JSON file`)
-    );
+        parsedNotes.push(newNote);
+
+    fs.writeFile(
+        "./db/db.json",
+        JSON.stringify(parsedNotes, null, 2),
+        (writeErr) =>
+         writeErr
+          ? console.error(writeErr)
+          : console.info("Successfully updated notes!")
+        );
+      }
+    });
 
     const response = {
-      status: "success",
+      status: 'success',
       body: newNote,
     };
-
     console.log(response);
-    res.status(201).json(response);
+    // res.json(newNote);
   } else {
     res.status(500).json("Error in posting note");
   }
@@ -56,5 +66,5 @@ app.get("*", (req, res) =>
 );
 
 app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT} 🚀`)
+  console.log(`App listening at http://localhost:${PORT}`)
 );
