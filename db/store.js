@@ -1,12 +1,12 @@
-const Server = require("../server");
-const util = require("util")
-const fs = require("fs")
+// const Server = require("../server");
+// const util = require("util")
+// const fs = require("fs")
 
-const readFileAsync = util.promisify(fs.readFile);
-const writeFileAsynce = util.promisify(fs.writeFile;)
+// const readFileAsync = util.promisify(fs.readFile);
+// const writeFileAsynce = util.promisify(fs.writeFile;)
 
-class Store {
-    read() {
-        return readFileAsync('/db.json', 'utf8')
-    }
-}
+// class Store {
+//     read() {
+//         return readFileAsync('/db.json', 'utf8')
+//     }
+// }
