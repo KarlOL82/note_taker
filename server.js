@@ -1,6 +1,6 @@
 // Required files and modules
 const express = require("express");
-const notes = require("./db/db.json");
+let notes = require("./db/db.json");
 const fs = require("fs");
 const path = require("path");
 const uuid = require("./public/assets/uuid");
@@ -60,23 +60,23 @@ app.delete("/api/notes/:id", (req, res) => {
       console.error(err);
     } else {
       const parsedNotes = JSON.parse(data);
-      const notesDecremented = parsedNotes.filter(
-        (notes) => notes.id !== uuid(req.params.id)
+      notes = parsedNotes.filter(
+        (newNote) => newNote.id !== (req.params.id)
       );
       fs.writeFile(
         "./db/db.json",
-        JSON.stringify(notesDecremented, null, 2),
+        JSON.stringify(notes, null, 2),
         (writeErr) =>
           writeErr
             ? console.error(writeErr)
             : console.info("Successfully updated notes!")
       );
       const response = {
-        status: "success",
-        body: notesDecremented,
+        status: "successfully deleted Note! ",
+        body: notes,
       };
       console.log(response);
-      res.json(notesDecremented);
+      res.json(notes);
     }
   });
 });

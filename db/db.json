@@ -1,66 +1,12 @@
 [
   {
-    "title": "Test Title",
-    "text": "Test text"
+    "text": "Click around and find out!",
+    "title": "Is this deletable?",
+    "id": "0b79"
   },
   {
-    "text": "6",
-    "title": "6",
-    "note_id": "f63e"
-  },
-  {
-    "text": "7",
-    "title": "7",
-    "note_id": "44d4"
-  },
-  {
-    "text": "9",
-    "title": "9",
-    "note_id": "306d"
-  },
-  {
-    "text": "6",
-    "title": "6",
-    "note_id": "4173"
-  },
-  {
-    "text": "5",
-    "title": "5",
-    "note_id": "38aa"
-  },
-  {
-    "text": "9",
-    "title": "9",
-    "note_id": "0bac"
-  },
-  {
-    "text": "Rated T for textual content",
-    "title": "Clever Title",
-    "note_id": "c69b"
-  },
-  {
-    "text": "Ok, yeah, now is good",
-    "title": "How about now?",
-    "note_id": "633d"
-  },
-  {
-    "text": "11",
-    "title": "11",
-    "id": "c505"
-  },
-  {
-    "text": "Yes you can!",
-    "title": "Can I click it?",
-    "id": "34d7"
-  },
-  {
-    "text": "65",
-    "title": "56",
-    "id": "5c20"
-  },
-  {
-    "text": "I'm still here",
-    "title": "Delete Me!",
-    "id": "f672"
+    "text": "Test",
+    "title": "Display test",
+    "id": "50d7"
   }
 ]
