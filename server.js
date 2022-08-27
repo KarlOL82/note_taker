@@ -31,6 +31,12 @@ app.post("/api/notes", (req, res) => {
       note_id: uuid(),
     };
 
+    // const noteString = JSON.stringify(newNote);
+
+    // fs.writeFile("./db/db.json", noteString, (err) => {
+    //   err ? console.error(err) : console.log("Successfully updated notes!");
+    // });
+    // notestring.push(notes);
      
     //     // noteString.push(notes)
     
@@ -57,10 +63,7 @@ app.post("/api/notes", (req, res) => {
           );
         }
       });
-//     const noteString = JSON.stringify(newNote);
-    // fs.writeFile("./db/db.json", noteString, (err) => {
-    //   err ? console.error(err) : console.log("Successfully updated notes!");
-    // });
+
 
     const response = {
       status: "success",
