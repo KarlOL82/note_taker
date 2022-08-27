@@ -32,38 +32,30 @@ app.post("/api/notes", (req, res) => {
     };
 
     // const noteString = JSON.stringify(newNote);
-
-    // fs.writeFile("./db/db.json", noteString, (err) => {
-    //   err ? console.error(err) : console.log("Successfully updated notes!");
-    // });
-    // notestring.push(notes);
+    // noteString.push(notes);
      
-    //     // noteString.push(notes)
     
     fs.readFile("./db/db.json", "utf8", (err, data) => {
         if (err) {
           console.error(err);
         } else {
-          const parsedNotes = JSON.parse(data);
-        //    parsedNotes = JSON.parse(data);
-  
-        //   parsedNotes.push(notes);
-  
-          parsedNotes.push(newNote);
-  
-  
+           noteString = JSON.parse(data);
+           noteString.push(newNote);
+           newNote.push(notes);
       fs.writeFile(
           "./db/db.json",
-          JSON.stringify(parsedNotes, null, 2),
+          JSON.stringify(noteString, null, 2),
           (writeErr) =>
-          JSON.stringify(parsedNotes, null, 2),(writeErr) =>
            writeErr
             ? console.error(writeErr)
             : console.info("Successfully updated notes!")
           );
         }
       });
-
+//     const noteString = JSON.stringify(newNote);
+    // fs.writeFile("./db/db.json", noteString, (err) => {
+    //   err ? console.error(err) : console.log("Successfully updated notes!");
+    // });
 
     const response = {
       status: "success",
@@ -76,11 +68,11 @@ app.post("/api/notes", (req, res) => {
   }
 });
 
-var readNotes;
-fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
-  if (err) throw err;
-  readNotes = JSON.parse(data);
-});
+// var readNotes;
+// fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
+//   if (err) throw err;
+//   readNotes = JSON.parse(data);
+// });
 
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
