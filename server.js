@@ -30,49 +30,24 @@ app.post("/api/notes", (req, res) => {
       title,
       note_id: uuid(),
     };
+    notes.push(newNote);
 
-    // const noteString = JSON.stringify(newNote);
-    // noteString.push(notes);
-     
+    fs.writeFile("./db/db.json", JSON.stringify(notes, null, 2), (writeErr) =>
+      writeErr
+        ? console.error(writeErr)
+        : console.info("Successfully updated notes!")
+    );
     
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
-        if (err) {
-          console.error(err);
-        } else {
-           noteString = JSON.parse(data);
-           noteString.push(newNote);
-           newNote.push(notes);
-      fs.writeFile(
-          "./db/db.json",
-          JSON.stringify(noteString, null, 2),
-          (writeErr) =>
-           writeErr
-            ? console.error(writeErr)
-            : console.info("Successfully updated notes!")
-          );
-        }
-      });
-//     const noteString = JSON.stringify(newNote);
-    // fs.writeFile("./db/db.json", noteString, (err) => {
-    //   err ? console.error(err) : console.log("Successfully updated notes!");
-    // });
-
     const response = {
       status: "success",
       body: newNote,
     };
     console.log(response);
-    res.json(newNote);
+    res.json(notes);
   } else {
     res.status(500).json("Error in posting note");
   }
 });
-
-// var readNotes;
-// fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
-//   if (err) throw err;
-//   readNotes = JSON.parse(data);
-// });
 
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
@@ -83,3 +58,19 @@ app.listen(PORT, () =>
 );
 
 
+// fs.readFile("./db/db.json", "utf8", (err, data) => {
+    //     if (err) {
+    //       console.error(err);
+    //     } else {
+    //        parsedNotes = JSON.parse(data);
+    //       parsedNotes.push(newNote);
+    //   fs.writeFile(
+    //       "./db/db.json",
+    //       JSON.stringify(parsedNotes, null, 2),
+    //       (writeErr) =>
+    //        writeErr
+    //         ? console.error(writeErr)
+    //         : console.info("Successfully updated notes!")
+    //       );
+    //     }
+    //    })
