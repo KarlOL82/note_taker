@@ -53,7 +53,7 @@ app.post("/api/notes", (req, res) => {
     res.status(500).json("Error in posting note");
   }
 });
-
+// deletes the selected note by filtering all unselected notes into a new array and writing that to the notes page
 app.delete("/api/notes/:id", (req, res) => {
   fs.readFile("./db/db.json", "utf8", (err, data) => {
     if (err) {
@@ -80,7 +80,7 @@ app.delete("/api/notes/:id", (req, res) => {
     }
   });
 });
-
+// routes the user to the main page
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
