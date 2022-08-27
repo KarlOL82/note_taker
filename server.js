@@ -31,14 +31,36 @@ app.post("/api/notes", (req, res) => {
       note_id: uuid(),
     };
 
-    const noteString = JSON.stringify(newNote); 
-        // noteString.push(notes)
+     
+    //     // noteString.push(notes)
     
-       
-
-    fs.writeFile("./db/db.json", noteString, (err) => {
-      err ? console.error(err) : console.log("Successfully updated notes!");
-    });
+    fs.readFile("./db/db.json", "utf8", (err, data) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const parsedNotes = JSON.parse(data);
+        //    parsedNotes = JSON.parse(data);
+  
+        //   parsedNotes.push(notes);
+  
+          parsedNotes.push(newNote);
+  
+  
+      fs.writeFile(
+          "./db/db.json",
+          JSON.stringify(parsedNotes, null, 2),
+          (writeErr) =>
+          JSON.stringify(parsedNotes, null, 2),(writeErr) =>
+           writeErr
+            ? console.error(writeErr)
+            : console.info("Successfully updated notes!")
+          );
+        }
+      });
+//     const noteString = JSON.stringify(newNote);
+    // fs.writeFile("./db/db.json", noteString, (err) => {
+    //   err ? console.error(err) : console.log("Successfully updated notes!");
+    // });
 
     const response = {
       status: "success",
@@ -65,20 +87,4 @@ app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
 
-// fs.readFile("./db/db.json", "utf8", (err, data) => {
-//   if (err) {
-//     console.error(err);
-//   } else {
-//      parsedNotes = JSON.parse(data);
 
-//     parsedNotes.push(notes);
-
-// fs.writeFile(
-//     "./db/db.json",
-//     JSON.stringify(parsedNotes, null, 2),(writeErr) =>
-//      writeErr
-//       ? console.error(writeErr)
-//       : console.info("Successfully updated notes!")
-//     );
-//   }
-// });
