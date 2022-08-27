@@ -42,7 +42,7 @@ app.post("/api/notes", (req, res) => {
         ? console.error(writeErr)
         : console.info("Successfully updated notes!")
     );
-    
+
     const response = {
       status: "success",
       body: newNote,
@@ -55,31 +55,31 @@ app.post("/api/notes", (req, res) => {
 });
 
 app.delete("/api/notes/:id", (req, res) => {
-    fs.readFile("./db/db.json", "utf8", (err, data) => {
-        if (err) {
-          console.error(err);
-        } else {
-           parsedNotes = JSON.parse(data);
-          const notesDecremented = parsedNotes.filter(notes => notes.id !== parseInt(req.params.id));
+  fs.readFile("./db/db.json", "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      const parsedNotes = JSON.parse(data);
+      const notesDecremented = parsedNotes.filter(
+        (notes) => notes.id !== uuid(req.params.id)
+      );
       fs.writeFile(
-          "./db/db.json",
-          JSON.stringify(notesDecremented, null, 2),
-          (writeErr) =>
-           writeErr
+        "./db/db.json",
+        JSON.stringify(notesDecremented, null, 2),
+        (writeErr) =>
+          writeErr
             ? console.error(writeErr)
             : console.info("Successfully updated notes!")
-          );
-          const response = {
-            status: "success",
-            body: notesDecremented,
-          };
-          console.log(response);
-          res.json(notes);
-        } 
-    });
-      
+      );
+      const response = {
+        status: "success",
+        body: notesDecremented,
+      };
+      console.log(response);
+      res.json(notesDecremented);
+    }
+  });
 });
-
 
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
@@ -88,5 +88,3 @@ app.get("*", (req, res) =>
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT}`)
 );
-
-
