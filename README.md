@@ -32,6 +32,7 @@ Navigate to the landing page using the provided URL and then click on the 'Get S
 
  ## Photos  
  ![Landing Page](./public/assets/images/image1.png "Landing Page")  
+   
  ![Note Page](./public/assets/images/image2.png "Note Page")
 
 
